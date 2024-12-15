@@ -66,13 +66,17 @@ class TestCardGame(TestCase):
         with self.assertRaises(RuntimeError):
             self.game.new_game()
 
-    def test_get_winner_have_winner(self):
-        print('test_get_winner_have_winner')
+    def test_get_winner_first_winner(self):
+        print('test_get_winner_first_winner')
         self.game.player1.add_card(self.game.player2.get_card())
         print(f'Player 1 cards deck length: {len(self.game.player1.cards_deck)}')
         print(f'Player 2 cards deck length: {len(self.game.player2.cards_deck)}')
         self.assertTrue(self.game.player1, self.game.get_winner())
 
+    def test_get_winner_second_winner(self):
+        print('test_get_winner_second_winner')
+        self.game.player2.add_card(self.game.player1.get_card())
+        self.assertTrue(self.game.player2,self.game.get_winner())
 
     def test_get_winner_tie(self):
         print('test_get_winner_tie')
