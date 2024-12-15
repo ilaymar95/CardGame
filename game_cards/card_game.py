@@ -1,6 +1,6 @@
-from player import Player
-from card import Card
-from deck_of_cards import DeckOfCards
+from game_cards.player import Player
+from game_cards.card import Card
+from game_cards.deck_of_cards import DeckOfCards
 
 class CardGame:
     def __init__(self,player1_name:str,player2_name:str,amount:int):

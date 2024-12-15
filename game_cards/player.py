@@ -1,5 +1,5 @@
-from deck_of_cards import DeckOfCards
-from card import Card
+from game_cards.deck_of_cards import DeckOfCards
+from game_cards.card import Card
 from random import randint
 
 class Player:
@@ -25,20 +25,26 @@ class Player:
         """
         return f"Player name: {self.name}\nCards: {[card for card in self.cards_deck]}"
 
-    def set_hand(self,card_deck:DeckOfCards):
+    def set_hand(self, card_deck: DeckOfCards):
         """
         The function gets a deck of cards.
         Sets the hand of the player according to the player's cards_to_deal variable
         """
         if type(card_deck) != DeckOfCards:
             raise TypeError("Card deck must be of type DeckOfCards")
-        while len(self.cards_deck)<self.cards_to_deal:
-            self.cards_deck.append(card_deck.deal_one())
+        if len(card_deck.card_deck)<self.cards_to_deal:
+            for i in range(len(card_deck.card_deck)):
+                self.cards_deck.append(card_deck.card_deck.pop())
+        else:
+            while len(self.cards_deck)<self.cards_to_deal:
+                self.cards_deck.append(card_deck.deal_one())
 
     def get_card(self):
         """
         The function returns a random card from the player's cards_deck
         """
+        if len(self.cards_deck)<1:
+            raise ValueError("Card deck cannot be empty")
         return self.cards_deck.pop(randint(0,len(self.cards_deck)-1))
 
     def add_card(self,card:Card):
@@ -60,5 +66,5 @@ class Player:
             raise TypeError("Player must be of type Player")
         for card in self.cards_deck:
             if card in other.cards_deck:
-                return False
+                raise ValueError("Card already in deck! Not a possible option!!!")
         return True
