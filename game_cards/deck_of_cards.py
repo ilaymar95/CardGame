@@ -20,12 +20,17 @@ class DeckOfCards:
         """
         Shuffles the deck of cards using Python's shuffle() method
         """
-        shuffle(self.card_deck)
+        if len(self.card_deck) <1:
+            raise ValueError("Deck of cards cannot be empty")
+        else:
+            shuffle(self.card_deck)
 
     def deal_one(self):
         """
         removes and returns 1 random card from the deck
         """
+        if len(self.card_deck) == 0:
+            return None
         return self.card_deck.pop(randint(0,len(self.card_deck)-1))
 
 
