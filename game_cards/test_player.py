@@ -100,8 +100,11 @@ class TestPlayer(TestCase):
 
     @mock.patch('game_cards.deck_of_cards.DeckOfCards.deal_one', return_value=Card(1, 1))
     def test_set_hand_mocked(self, mocked_card):
-        with self.assertRaises(ValueError):
-            self.player.set_hand(self.deck)
+        self.player.set_hand(self.deck)
+        self.assertTrue(len(self.player.cards_deck) == 26)
+        for card in self.player.cards_deck:
+            self.assertTrue(card.value == 1)
+            self.assertTrue(card.suit == 1)
 
 
     def test_set_hand_deck_length_lower(self):

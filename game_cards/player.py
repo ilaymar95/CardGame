@@ -36,8 +36,6 @@ class Player:
            self.cards_to_deal=len(card_deck.card_deck)
         for i in range(self.cards_to_deal):
             card = card_deck.deal_one()
-            if card in self.cards_deck:
-                raise ValueError(f"Card {card} already in deck")
             self.cards_deck.append(card)
 
     def get_card(self):
