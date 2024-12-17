@@ -125,10 +125,9 @@ class TestPlayer(TestCase):
         Tests that the function returns a card correctly, the card is unique and not in the Deck.
         Deck length changes
         """
-        card = self.deck.deal_one()
-        print(f'{card} of {type(card)}')
-        self.assertNotIn(card, self.deck.card_deck)
-        self.assertTrue(len(self.deck.card_deck) == 51)
+        self.player.set_hand(self.deck)
+        card = self.player.get_card()
+        self.assertTrue(len(self.player.cards_deck) < self.player.cards_to_deal)
         self.assertTrue(isinstance(card, Card))
 
 
@@ -150,7 +149,7 @@ class TestPlayer(TestCase):
         card = self.deck.deal_one()
         self.player.add_card(card)
         self.assertIn(card, self.player.cards_deck)
-
+        self.assertTrue(isinstance(card, Card))
 
     def test_add_card_invalid_card_type(self):
         """
@@ -160,7 +159,6 @@ class TestPlayer(TestCase):
         with self.assertRaises(TypeError):
             self.player.add_card(1)
 
-
     def test_add_card_already_exists(self):
         """
         Tests the function raises ValueError when given an already existing card
@@ -169,4 +167,3 @@ class TestPlayer(TestCase):
         self.player.add_card(card)
         with self.assertRaises(ValueError):
             self.player.add_card(card)
-

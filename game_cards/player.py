@@ -56,4 +56,3 @@ class Player:
         if card in self.cards_deck:
             raise ValueError("Card already in deck! Not a possible option!!!")
         self.cards_deck.append(card)
-
