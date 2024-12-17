@@ -30,7 +30,7 @@ class CardGame:
         Starts a new game, initialized from the __init__ method and cannot be used
         """
         if not self._initialized_:
-            raise RuntimeError("new_game() is private and cannot be accessed!!!")
+           print("new_game() is private and cannot be accessed!!!")
         else:
             self.card_deck.cards_shuffle()
             self.player1.set_hand(self.card_deck)

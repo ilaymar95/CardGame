@@ -3,7 +3,7 @@ from game_cards.card import Card
 from random import randint
 
 class Player:
-    def __init__(self,name:str,cards_to_deal:int):
+    def __init__(self,name:str,cards_to_deal=26):
         """
         __init__ gets a name(string) and amount of cards to deal(int) and creates a Player with an empty card deck
         """
@@ -33,8 +33,8 @@ class Player:
         if type(card_deck) != DeckOfCards:
             raise TypeError("Card deck must be of type DeckOfCards")
         if len(card_deck.card_deck)<self.cards_to_deal:
-           raise ValueError("Card deck cannot be smaller than player's amount of cards")
-        while len(self.cards_deck)<self.cards_to_deal:
+           self.cards_to_deal=len(card_deck.card_deck)
+        for i in range(self.cards_to_deal):
             card = card_deck.deal_one()
             if card in self.cards_deck:
                 raise ValueError(f"Card {card} already in deck")
@@ -45,7 +45,7 @@ class Player:
         The function returns a random card from the player's cards_deck
         """
         if len(self.cards_deck)<1:
-            raise ValueError("Card deck cannot be empty")
+            return None
         return self.cards_deck.pop(randint(0,len(self.cards_deck)-1))
 
     def add_card(self,card:Card):
@@ -59,13 +59,3 @@ class Player:
             raise ValueError("Card already in deck! Not a possible option!!!")
         self.cards_deck.append(card)
 
-    def compare_decks(self,other):
-        """
-        The function compares the decks between 2 Players and returns True if they're unique, False otherwise
-        """
-        if type(other) != Player:
-            raise TypeError("Player must be of type Player")
-        for card in self.cards_deck:
-            if card in other.cards_deck:
-                raise ValueError("Card already in deck! Not a possible option!!!")
-        return True

@@ -12,24 +12,20 @@ class TestCard(TestCase):
         self.card = None
 
     def test_init_valid(self):
-        print('This is test_init_valid')
-        self.assertTrue(type(self.card) == Card)
+        self.assertTrue(self.card.value == 1)
+        self.assertEqual(self.card.suit,1)
 
-    def test_init_valid_suit_all_suits(self):
+    def test_init_valid_suit_4(self):
         """
-        Tests to check all the valid suits(1-4) for a Card object
+        Tests to check edge value for suit of a Card object
         """
-        print('test_init_valid_suit_all_suits')
-        for suit in range(1, 5):
-            card = Card(suit, 1)
-            self.assertTrue(type(card) == Card)
-            print('True')
+        card = Card(4,1)
+        self.assertEqual(card.suit,4)
 
     def test_init_invalid_suit_0(self):
         """
         Tests the bottom invalid number for a suit (0) and checks that it raises ValueError
         """
-        print('test_init_invalid_suit_0')
         with self.assertRaises(ValueError):
             card = Card(0, 1)
 
@@ -37,7 +33,6 @@ class TestCard(TestCase):
         """
         Tests the top invalid number for a suit (5) and checks that it raises ValueError
         """
-        print('test_init_invalid_suit_5')
         with self.assertRaises(ValueError):
             card = Card(5, 1)
 
@@ -45,7 +40,7 @@ class TestCard(TestCase):
         """
         Tests the invalid type for a suit (not a number) and checks that it raises TypeError
         """
-        print('test_init_invalid_suit_type')
+
         with self.assertRaises(TypeError):
             card = Card('10', 1)
 
@@ -53,7 +48,6 @@ class TestCard(TestCase):
         """
         Tests the invalid value for a card value (14) and checks that it raises ValueError
         """
-        print('test_init_invalid_value_14')
         with self.assertRaises(ValueError):
             card = Card(1, 14)
 
@@ -61,7 +55,6 @@ class TestCard(TestCase):
         """
         Tests the invalid value for a card value (0) and checks that it raises ValueError
         """
-        print('test_init_invalid_value_0')
         with self.assertRaises(ValueError):
             card = Card(1, 0)
 
@@ -69,16 +62,13 @@ class TestCard(TestCase):
         """
         Tests the invalid type for a card value and raises TypeError
         """
-        print('test_init_invalid_value_type')
         with self.assertRaises(TypeError):
             card = Card(1, [1])
 
     def test__gt__valid_equal_suit(self):
         """
         Tests the valid __gt__ method showing the difference with Ace, King and 5
-        :return:
         """
-        print('test__gt__valid_equal_suit')
         card = Card(1, 13)
         card2 = Card(1, 5)
         self.assertTrue(self.card > card)
@@ -108,21 +98,21 @@ class TestCard(TestCase):
         with self.assertRaises(TypeError):
             self.assertTrue(self.card > card)
 
-    def test__eq__valid_True_and_False(self):
+    def test__eq__valid_True_(self):
         """
         Tests the __eq__ method
         """
-        print('test__eq__valid_True_and_False')
         card = Card(1, 1)
         self.assertTrue(self.card == card)
+
+    def test__eq__valid_False_(self):
         card2 = Card(2, 1)
-        self.assertFalse(card == card2)
+        self.assertFalse(self.card == card2)
 
     def test__eq_invalid_type(self):
         """
         Tests the __eq__ method invalid type of other
         """
-        print('test__eq_invalid_type')
         card = "Card"
         with self.assertRaises(TypeError):
             self.assertTrue(self.card == card)

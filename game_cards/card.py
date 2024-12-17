@@ -17,6 +17,7 @@ class Card:
     def __repr__(self):
         """
         returns a string representation of the card
+        Using value and suit as index
         """
         suits = ['Diamonds','Spades','Hearts','Clubs']
         values = [None, "Ace", "2", "3", "4", "5", "6", "7", "8", "9", "10", "Jack", "Queen", "King"]
