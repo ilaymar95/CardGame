@@ -3,7 +3,7 @@ from game_cards.player import Player
 from game_cards.deck_of_cards import DeckOfCards
 from game_cards.card import Card
 from unittest import mock
-from unittest.mock import patch
+
 
 
 class TestPlayer(TestCase):
@@ -118,8 +118,9 @@ class TestPlayer(TestCase):
         for i in range(self.player.cards_to_deal+1): # cards_to_deal == 26 so running 27 times to make deck length 25
             self.deck.card_deck.pop()
         self.assertTrue(len(self.deck.card_deck) < self.player.cards_to_deal)
-        self.player.set_hand(self.deck)
-        self.assertTrue(len(self.player.cards_deck) < self.player.cards_to_deal)
+        with self.assertRaises(ValueError):
+             self.player.set_hand(self.deck)
+
 
     def test_get_card_deck_full(self):
         """
