@@ -101,6 +101,14 @@ class TestPlayer(TestCase):
             deck = [DeckOfCards()]
             self.player.set_hand(deck)
 
+    @mock.patch('game_cards.deck_of_cards.DeckOfCards.deal_one', return_value=Card(1,1))
+    def test_set_hand_mocked(self,mocked_card):
+        print('test_set_hand_mocked')
+        with self.assertRaises(ValueError):
+            self.player.set_hand(self.deck)
+
+
+
     def test_set_hand_deck_length_lower(self):
         """
         Tests what happens when the deck's length is less than the amount of cards to deal.

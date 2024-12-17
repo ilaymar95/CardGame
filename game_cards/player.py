@@ -34,10 +34,16 @@ class Player:
             raise TypeError("Card deck must be of type DeckOfCards")
         if len(card_deck.card_deck)<self.cards_to_deal:
             for i in range(len(card_deck.card_deck)):
-                self.cards_deck.append(card_deck.card_deck.pop())
+                card = card_deck.deal_one()
+                if card in self.cards_deck:
+                    raise ValueError(f"Card {card} already in deck")
+                self.cards_deck.append(card)
         else:
             while len(self.cards_deck)<self.cards_to_deal:
-                self.cards_deck.append(card_deck.deal_one())
+                card = card_deck.deal_one()
+                if card in self.cards_deck:
+                    raise ValueError(f"Card {card} already in deck")
+                self.cards_deck.append(card)
 
     def get_card(self):
         """
