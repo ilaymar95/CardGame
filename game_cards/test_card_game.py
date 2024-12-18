@@ -16,14 +16,18 @@ class TestCardGame(TestCase):
         print('This is a tearDown')
         self.game = None
 
-    def test_init_valid(self):
+    def test_init_valid_player(self):
         """
         Tests that the function creates a new game correctly and sets the player hands
         """
         self.assertTrue(type(self.game.player1) == Player)
         self.assertTrue(type(self.game.player2) == Player)
+
+    def test_init_valid_player_deck(self):
         self.assertTrue(len(self.game.player1.cards_deck) == len(self.game.player2.cards_deck))
         self.assertTrue(len(self.game.player1.cards_deck) == 26)
+
+    def test_init_valid_game_deck(self):
         self.assertTrue(type(self.game.card_deck) == DeckOfCards)
 
     def test_init_invalid_player_name_type(self):

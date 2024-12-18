@@ -78,7 +78,6 @@ class TestCard(TestCase):
         """
         Tests the valid __gt__ method showing the difference with equal value but different suits
         """
-        print('test__gt__valid_equal_value')
         card = Card(2, 10)
         card2 = Card(1, 10)
         self.assertTrue(card2 > card)
